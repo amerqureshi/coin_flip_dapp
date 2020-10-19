@@ -43,14 +43,11 @@ contract Coin is Ownable, usingProvable {
     // check to ensure that contract balance can cover the bet
     assert(address(this).balance*2 - GAS_FOR_CALLBACK >= msg.value);
     // call the oracle to get the random number
-    bytes32 queryId = testRandom();
-    /*
     bytes32 queryId = provable_newRandomDSQuery(
       QUERY_EXECUTION_DELAY,
       NUM_RANDOM_BYTES_REQUESTED,
       GAS_FOR_CALLBACK
     );
-    */
     // use the queryId to track the players bet
     players[msg.sender].queryId = queryId;
     players[msg.sender].isWaiting = true;
@@ -63,7 +60,7 @@ contract Coin is Ownable, usingProvable {
 
   // called from the oracle when it sends back the random
   function __callback(bytes32 _queryId, string memory _result, bytes memory _proof) public {
-    //require(msg.sender == provable_cbAddress());
+    require(msg.sender == provable_cbAddress());
 
     uint256 randomNumber = uint256(keccak256(abi.encodePacked(_result))) % 2;
     string memory coinFaceStr = randomNumber == 0 ? "Heads" : "Tails";
@@ -89,14 +86,6 @@ contract Coin is Ownable, usingProvable {
       emit betPlaced(playerAddress, betAmount, coinFaceStr, false, 0);
     }
   }
-
-  // test function used during dev and testing (not used in prod)
-  function testRandom() public returns(bytes32){
-      bytes32 queryId = bytes32(keccak256(abi.encodePacked(msg.sender)));
-      uint256 randomNumber = 1;
-      __callback(queryId, uint2str(randomNumber), bytes("test"));
-      return queryId;
-    }
 
   // used to deposit funds to the contract. is public so players can also donate to the contract
   function deposit() payable public {
