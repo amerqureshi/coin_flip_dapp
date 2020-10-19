@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>People</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./web3.min.js"></script>
+    <script type="text/javascript" src="./abi.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+      .red {background-color: red;}
+      .admin {margin-top: 50px}
+      .input-group, #admin_input {border: 1px solid black; width: 400px}
+      #admin_input {width:140px; float:left; margin-right:5px}
+      #admin_deposit {margin-bottom: 20px}
+    </style>
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Coin Flip Dapp</h1>
+        <p class="lead">Place your bet. Win big. Buy a lambo.</p>
+        <h2>Wallet Balance: <span id="account_balance"></span> ETH</h2>
+        <h2>Contract Balance: <span id="contract_balance"></span> ETH</h2>
+        <h2>Win Balance: <span id="player_balance"></span> ETH</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div id="coin_image">
+        <img id="coin" src="coinflip.jpg" style="width:300px;margin-top:-80px"/>
+      </div>
+      <div>
+        <h2>Select Heads or Tails</h2>
+        <div class="input-group mb-3">
+          <select id="coinface_dropdown" class="form-control">
+              <option value="0">Heads</option>
+              <option value="1">Tails</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="bet_input" placeholder="Bet Amount (minium bet 0.1)" >
+        </div>
+        <button type="button" id="place_bet_button" class="btn btn-primary">place bet</button>
+        <button type="button" id="cash_out_button" class="btn btn-primary">cash out</button>
+      </div>
+      <div>
+        <div style="margin-top:50px">
+          <h2><span id="bet_result"></span></h2>
+        </div>
+      </div>
+        <div class="admin">
+          <h3>Admin Section</h3>
+          <div id="admin_deposit">
+            <button type="button" id="deposit_button" class="btn btn-primary red">deposit</button>
+            <input type="text" class="form-control" id="admin_input" placeholder="deposit amount" >
+          </div>
+          <button type="button" id="balance_button" class="btn btn-primary red">get balance</button>
+          <button type="button" id="withdraw_button" class="btn btn-primary red">withdraw all</button>
+        </div>
+        <div class="admin_txt">
+          <h2><span id="admin_text"></span></h2>
+        </div>
+    </div>
+
+
+  </body>
+</html>
