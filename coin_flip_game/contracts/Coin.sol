@@ -1,3 +1,4 @@
+/* amer_qureshi@yahoo.com */
 
 import "./Ownable.sol";
 import "./ProvableAPI.sol";
